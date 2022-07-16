@@ -21,8 +21,6 @@ vector<int> extractNumbers(string numbers){
     }
 
     for(i;i<numbers.length();i++){
-    	
-     
         if(find(delimiter.begin(),delimiter.end(),numbers[i])==delimiter.end() )temp+=numbers[i];
         else{
         	if(numbers[i]==92)i++;
@@ -30,7 +28,7 @@ vector<int> extractNumbers(string numbers){
             temp="";
         }
     }
-
+    //for last number in string
     if(i==numbers.length() && temp!="")nums.push_back(stoi(temp));
 
     return nums;
@@ -44,7 +42,16 @@ int Add(string numbers){
     //extractNumbers extract numvers from strings
     vector<int> nums=extractNumbers(numbers);
 
+    //If we have negative numbers
+    bool isNag=false; 
+    for(int i=0;i<nums.size();i++){
+    	if(nums[i]<0){
+    		cout<<"negative numbers not allowed"<<endl;
+    		isNag=true;
+    	}
+    }
     //sum of extracted numbers
+    if(isNag) return 0;
     return accumulate(nums.begin(),nums.end(),0);
 }
 
