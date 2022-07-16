@@ -5,12 +5,25 @@ using namespace std;
 //Method for finding numbers from string
 vector<int> extractNumbers(string numbers){
     vector<int> nums;
-    int i;
+    int i=0;
     string temp="";
 
-    for(i=0;i<numbers.length();i++){
-    	//here 92 is ascii of '\'
-        if(numbers[i]!=',' && numbers[i]!=92 )temp+=numbers[i];
+    //vector for maintaing delimeter list
+    std::vector<char> delimiter;
+    delimiter.push_back(',');
+    //here 92 is ascii of '\'
+    delimiter.push_back((char)92);
+
+    //if delimeter specified in string
+    if(numbers.substr(0,2)=="//"){
+    	delimiter.push_back(numbers[2]);
+    	i=5;
+    }
+
+    for(i;i<numbers.length();i++){
+    	
+     
+        if(find(delimiter.begin(),delimiter.end(),numbers[i])==delimiter.end() )temp+=numbers[i];
         else{
         	if(numbers[i]==92)i++;
             nums.push_back(stoi(temp));
